@@ -1,0 +1,123 @@
+openapi: 3.1.0
+info:
+  description: ""
+  title: greet.v1
+  version: ""
+paths:
+  /greet.v1.GreetService/Greet:
+    post:
+      description: ""
+      requestBody:
+        $ref: '#/components/requestBodies/greet.v1.GreetService.Greet.greet.v1.GreetRequest'
+      responses:
+        "200":
+          $ref: '#/components/responses/greet.v1.GreetService.Greet.greet.v1.GreetResponse'
+        default:
+          $ref: '#/components/responses/connect.error'
+      tags:
+      - greet.v1.GreetService
+components:
+  requestBodies:
+    greet.v1.GreetService.Greet.greet.v1.GreetRequest:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/greet.v1.GreetRequest'
+        application/proto:
+          schema:
+            description: The request is binary-concoded protobuf without gRPC framing.
+              See the [Connect Protocol](https://connectrpc.com/docs/protocol) for
+              more.
+            format: binary
+            properties:
+              protobufBinaryContents:
+                $ref: '#/components/schemas/greet.v1.GreetRequest'
+            type: object
+      required: true
+  responses:
+    connect.error:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/connect.error'
+        application/proto:
+          schema:
+            description: The response is binary-concoded protobuf without gRPC framing.
+              See the [Connect Protocol](https://connectrpc.com/docs/protocol) for
+              more.
+            format: binary
+            properties:
+              protobufBinaryContents:
+                $ref: '#/components/schemas/connect.error'
+            type: object
+      description: ""
+    greet.v1.GreetService.Greet.greet.v1.GreetResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/greet.v1.GreetResponse'
+        application/proto:
+          schema:
+            description: The response is binary-concoded protobuf without gRPC framing.
+              See the [Connect Protocol](https://connectrpc.com/docs/protocol) for
+              more.
+            format: binary
+            properties:
+              protobufBinaryContents:
+                $ref: '#/components/schemas/greet.v1.GreetResponse'
+            type: object
+      description: ""
+  schemas:
+    connect.error:
+      additionalProperties: false
+      description: 'Error type returned by Connect: https://connectrpc.com/docs/go/errors/#http-representation'
+      properties:
+        code:
+          enum:
+          - CodeCanceled
+          - CodeUnknown
+          - CodeInvalidArgument
+          - CodeDeadlineExceeded
+          - CodeNotFound
+          - CodeAlreadyExists
+          - CodePermissionDenied
+          - CodeResourceExhausted
+          - CodeFailedPrecondition
+          - CodeAborted
+          - CodeOutOfRange
+          - CodeInternal
+          - CodeUnavailable
+          - CodeDataLoss
+          - CodeUnauthenticated
+          examples:
+          - CodeNotFound
+          type: string
+        message:
+          type: string
+      title: Connect Error
+      type: object
+    greet.v1.GreetRequest:
+      additionalProperties: false
+      description: ""
+      properties:
+        name:
+          additionalProperties: false
+          description: ""
+          title: name
+          type: string
+      title: GreetRequest
+      type: object
+    greet.v1.GreetResponse:
+      additionalProperties: false
+      description: ""
+      properties:
+        greeting:
+          additionalProperties: false
+          description: ""
+          title: greeting
+          type: string
+      title: GreetResponse
+      type: object
+tags:
+- description: ""
+  name: greet.v1.GreetService
